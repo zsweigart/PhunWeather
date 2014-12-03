@@ -1,0 +1,13 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Zip Code List Items -->
+    <dimen name="zip_code_list_item_text">18sp</dimen>
+    <dimen name="zip_code_list_item_horizontal_margin">10dp</dimen>
+    <dimen name="zip_code_list_item_vertical_margin">5dp</dimen>
+
+    <!-- Zip Code List Activity -->
+
+</resources>

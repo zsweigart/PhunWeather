@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Weather API -->
+    <string name="wunderground_api_key">b0e10e6d24c8c9ef</string>
+    <string name="wunderground_api_call_start">http://api.wunderground.com/api/</string>
+    <string name="wunderground_conditions">conditions</string>
+    <string name="wunderground_conditions_current_observation">current_observation</string>
+    <string name="wunderground_conditions_observation_time">local_epoch</string>
+    <string name="wunderground_conditions_observation_time_string">observation_time</string>
+    <string name="wunderground_conditions_display_location">display_location</string>
+    <string name="wunderground_conditions_display_location_string">full</string>
+    <string name="wunderground_conditions_current_temp">temp_f</string>
+    <string name="wunderground_conditions_feels_like_temp">feelslike_f</string>
+    <string name="wunderground_conditions_humidity">relative_humidity</string>
+    <string name="wunderground_conditions_dew_point">dewpoint_f</string>
+    <string name="wunderground_conditions_pressure">pressure_in</string>
+    <string name="wunderground_conditions_wind_speed">wind_mph</string>
+    <string name="wunderground_conditions_wind_direction">wind_dir</string>
+    <string name="wunderground_forecast">forecast</string>
+    <string name="wunderground_simple_forecast">simpleforecast</string>
+    <string name="wunderground_forecast_day">forecastday</string>
+    <string name="wunderground_forecast_high">high</string>
+    <string name="wunderground_forecast_low">low</string>
+    <string name="wunderground_forecast_fahrenheit">fahrenheit</string>
+    <string name="wunderground_geolookup">geolookup</string>
+    <string name="wunderground_geolookup_location">location</string>
+    <string name="wunderground_geolookup_state">state</string>
+    <string name="wunderground_geolookup_city">city</string>
+
+    <string name="app_name">PhunWeather</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Intent Extra Keys -->
+
+    <!-- Shared Preferences Keys -->
+    <string name="zipcodelist">zipcodelist</string>
+    <string name="zipcode">zipcode</string>
+    <string name="title_activity_weather_details">Weather Details Activity</string>
+    <string name="cached_weather">cached_weather</string>
+
+</resources>
