@@ -139,13 +139,13 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
         locationTextView.setText(weatherStatus.getLocation());
 
         timeTextView.setText(weatherStatus.getObservationTimeString());
-        currentTempTextView.setText(weatherStatus.getCurrentTemp() + "° F");
-        forecastTextView.setText(weatherStatus.getLowTemp() + "° F/" + weatherStatus.getHighTemp() + "° F");
-        feelsLikeTempTextView.setText(weatherStatus.getFeelsLikeTemp() + "° F");
-        humidityTextView.setText(weatherStatus.getHumidity());
-        pressureTextView.setText(weatherStatus.getPressure() + " In.");
-        dewpointTextView.setText(weatherStatus.getDewPoint() + "° F");
-        windTextView.setText(weatherStatus.getWindSpeed() + " " + weatherStatus.getWindDirection());
+        currentTempTextView.setText("Current Temp: " + weatherStatus.getCurrentTemp() + "° F");
+        forecastTextView.setText("Low/High: " + weatherStatus.getLowTemp() + "° F/" + weatherStatus.getHighTemp() + "° F");
+        feelsLikeTempTextView.setText("Feels Like: " + weatherStatus.getFeelsLikeTemp() + "° F");
+        humidityTextView.setText("Humidity: " + weatherStatus.getHumidity());
+        pressureTextView.setText("Pressure: " + weatherStatus.getPressure() + " In.");
+        dewpointTextView.setText("Dew Point: " + weatherStatus.getDewPoint() + "° F");
+        windTextView.setText("Wind: " + weatherStatus.getWindSpeed() + " " + weatherStatus.getWindDirection());
         progressBar.setVisibility(View.GONE);
     }
 
