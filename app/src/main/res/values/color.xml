@@ -2,5 +2,7 @@
 <resources>
     <color name="text_color">#000</color>
     <color name="add_circle_color">#00f</color>
-
+    <color name="zip_code_list_item_bg_normal">#00000000</color>
+    <color name="zip_code_list_item_bg_pressed">#990000ff</color>
+    <color name="zip_code_list_item_bg_focused">#550000ff</color>
 </resources>

@@ -3,6 +3,7 @@ package com.zacharysweigart.phunweather.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -18,12 +19,14 @@ import com.google.gson.Gson;
 import com.zacharysweigart.phunweather.R;
 import com.zacharysweigart.phunweather.data.GetWeatherStatusAsyncTask;
 import com.zacharysweigart.phunweather.model.WeatherStatus;
+import com.zacharysweigart.phunweather.receiver.NetworkStateReceiver;
 import com.zacharysweigart.phunweather.util.PopulateWeatherUiInterface;
 
-public class WeatherDetailsActivity extends Activity implements PopulateWeatherUiInterface {
+public class WeatherDetailsActivity extends Activity implements PopulateWeatherUiInterface, NetworkStateReceiver.NetworkStateReceiverListener {
     private SharedPreferences sharedPreferences;
     private WeatherStatus weatherStatus;
     private String zipcode;
+    private NetworkStateReceiver networkStateReceiver;
 
     // UI Elements
     private ProgressBar progressBar;
@@ -60,11 +63,26 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
         } else {
             populateUi();
         }
+
+        if(!isNetworkAvailable()) {
+            refreshButton.setVisibility(View.GONE);
+        }
+
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        this.unregisterReceiver(networkStateReceiver);
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(weatherStatus);
@@ -132,6 +150,18 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
     }
 
     @Override
+    public void networkAvailable() {
+        refreshButton.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        new GetWeatherStatusAsyncTask(this, this, zipcode).execute();
+    }
+
+    @Override
+    public void networkUnavailable() {
+        refreshButton.setVisibility(View.GONE);
+    }
+
+    @Override
     public void setWeatherStatus(WeatherStatus weatherStatus) {
         this.weatherStatus = weatherStatus;
     }
@@ -141,4 +171,5 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
 }
