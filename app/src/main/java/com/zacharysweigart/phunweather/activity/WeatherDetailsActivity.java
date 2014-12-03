@@ -1,8 +1,11 @@
 package com.zacharysweigart.phunweather.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -98,10 +101,14 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
             WeatherStatus cachedWeatherStatus = gson.fromJson(cachedWeather, WeatherStatus.class);
 
             // If the cached data is more than 15 minutes old disregard it
-            if(cachedWeatherStatus == null || (System.currentTimeMillis()/1000 - cachedWeatherStatus.getObservationTime()) > (15 * 60 * 1000)) {
+            if(isNetworkAvailable() && (cachedWeatherStatus == null
+                    || (System.currentTimeMillis()/1000 - cachedWeatherStatus.getObservationTime()) > (15 * 60 * 1000))) {
                 return false;
             }
 
+            if(cachedWeatherStatus == null) {
+                cachedWeatherStatus = new WeatherStatus();
+            }
             // Otherwise return true that we can use the cached status
             weatherStatus = cachedWeatherStatus;
             return true;
@@ -127,5 +134,11 @@ public class WeatherDetailsActivity extends Activity implements PopulateWeatherU
     @Override
     public void setWeatherStatus(WeatherStatus weatherStatus) {
         this.weatherStatus = weatherStatus;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

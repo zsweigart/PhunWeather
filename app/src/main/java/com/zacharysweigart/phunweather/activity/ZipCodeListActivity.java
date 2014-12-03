@@ -2,6 +2,7 @@ package com.zacharysweigart.phunweather.activity;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -95,6 +96,10 @@ public class ZipCodeListActivity extends ListActivity {
                                         setListAdapter(new ZipCodeListAdapter(ZipCodeListActivity.this,
                                                 zipcodeList.toArray(new String[zipcodeList.size()])));
                                         ((ArrayAdapter) ZipCodeListActivity.this.getListView().getAdapter()).notifyDataSetChanged();
+
+                                        Intent intent = new Intent(ZipCodeListActivity.this, WeatherDetailsActivity.class);
+                                        intent.putExtra(ZipCodeListActivity.this.getString(R.string.zipcode), value.toString());
+                                        ZipCodeListActivity.this.startActivity(intent);
                                     } catch (NumberFormatException ex) {
                                         Toast.makeText(ZipCodeListActivity.this, "Enter a 5-digit zip code", Toast.LENGTH_LONG).show();
                                     }
