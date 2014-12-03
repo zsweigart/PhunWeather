@@ -58,7 +58,7 @@ public class ZipCodeListActivity extends ListActivity {
             }
         }
 
-        setListAdapter(new ZipCodeListAdapter(this, zipcodeList.toArray(new String[zipcodeList.size()])));
+        setListAdapter(new ZipCodeListAdapter(this, zipcodeList));
 
         setupButtons();
     }
@@ -93,8 +93,7 @@ public class ZipCodeListActivity extends ListActivity {
                                     try {
                                         Integer.parseInt(value.toString());
                                         zipcodeList.add(value.toString());
-                                        setListAdapter(new ZipCodeListAdapter(ZipCodeListActivity.this,
-                                                zipcodeList.toArray(new String[zipcodeList.size()])));
+                                        setListAdapter(new ZipCodeListAdapter(ZipCodeListActivity.this, zipcodeList));
                                         ((ArrayAdapter) ZipCodeListActivity.this.getListView().getAdapter()).notifyDataSetChanged();
 
                                         Intent intent = new Intent(ZipCodeListActivity.this, WeatherDetailsActivity.class);
